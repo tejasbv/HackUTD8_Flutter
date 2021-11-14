@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show BuildContext, MaterialApp, StatelessWidget, Widget, runApp;
 import 'package:hack_utd/Survey/quiz.dart';
 import 'package:hack_utd/Survey/survey.dart';
 import 'package:hack_utd/recorder.dart';

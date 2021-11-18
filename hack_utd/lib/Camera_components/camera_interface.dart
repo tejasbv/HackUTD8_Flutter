@@ -5,26 +5,26 @@ import 'package:hack_utd/Camera_components/dio_upload_service.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class CameraInterface extends StatefulWidget {
+  CameraInterface({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _CameraInterfaceState createState() => _CameraInterfaceState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _CameraInterfaceState extends State<CameraInterface> {
   final HttpUploadService _httpUploadService = HttpUploadService();
   final DioUploadService _dioUploadService = DioUploadService();
-  late CameraDescription _cameraDescription;
+  late final CameraDescription _cameraDescription;
   List<String> _images = [];
   @override
   void initState() {
     super.initState();
     availableCameras().then((cameras) {
       final camera = cameras
-          .where((camera) => camera.lensDirection == CameraLensDirection.back)
+          .where((camera) => camera.lensDirection == CameraLensDirection.front)
           .toList()
           .first;
       setState(() {
@@ -104,7 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
         child: Column(
           children: [
-            Text('Send least two pictures', style: TextStyle(fontSize: 17.0)),
+            Text('front view of the accident',
+                style: TextStyle(fontSize: 17.0)),
             SizedBox(
               height: 20,
             ),

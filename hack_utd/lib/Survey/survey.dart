@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hack_utd/Camera_components/camera_interface.dart';
 import 'package:hack_utd/Survey/quiz.dart';
 import 'package:hack_utd/Survey/result.dart';
+import 'package:hack_utd/Camera_components/camera_interface.dart';
 
 import '../support.dart';
 import '../recorder.dart';
@@ -13,21 +15,21 @@ class Survey extends StatefulWidget {
 class _SurveyState extends State<Survey> {
   final _questions = [
     {
-      "QuestionText": "was 911 called",
+      "QuestionText": "was 911 called?",
       "answers": [
         {"text": "Yes", "score": 10},
         {"text": "No ", "score": 0},
       ]
     },
     {
-      "QuestionText": "Was anyone injured",
+      "QuestionText": "Was anyone injured?",
       "answers": [
         {"text": "yes", "score": 10},
         {"text": "no", "score": 0},
       ]
     },
     {
-      "QuestionText": "any property damage",
+      "QuestionText": "any property damage?",
       "answers": [
         {"text": "Yes ", "score": 10},
         {"text": "No", "score": 0},
@@ -35,19 +37,19 @@ class _SurveyState extends State<Survey> {
     },
     {
       "QuestionText":
-          "any witnesses? *pleeas ask for permission and then record ",
+          "any witnesses? *please ask for permission and then record ?",
       "answers": [
         {"text": "Yes", "score": 10},
         {"text": "No", "score": 0},
       ]
     },
     {
-      "QuestionText": "number of vehicles involved",
+      "QuestionText": "number of vehicles involved (including yours)?",
       "answers": [
         {"text": "1 ", "score": 1},
         {"text": "2", "score": 2},
         {"text": "3 ", "score": 3},
-        {"text": "4", "score": 4},
+        {"text": ">4", "score": 4},
       ]
     },
   ];
@@ -66,13 +68,11 @@ class _SurveyState extends State<Survey> {
       if (score == 10) {
         cops_called = true;
       }
-    } else if (questionIndex == 1) {
+    } else if (questionIndex == 1 || questionIndex == 2) {
       if (score == 10 && !cops_called) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Support()));
       }
-    } else if (questionIndex == 2) {
-      if (score == 10) {}
     } else if (questionIndex == 3) {
       if (score == 10) {
         Navigator.push(context,
@@ -92,14 +92,11 @@ class _SurveyState extends State<Survey> {
     return MaterialApp(
       home: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                const Color(0xFF0652C5),
-                Colors.lightGreenAccent.shade200
-              ])),
+                  colors: [Colors.red, Colors.redAccent])),
           child: questionIndex < _questions.length
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -107,17 +104,19 @@ class _SurveyState extends State<Survey> {
                   children: [
                     Text(
                       "Question ${questionIndex + 1} of ${_questions.length}",
-                      style: TextStyle(fontSize: 36, color: Colors.cyan[200]),
+                      style: TextStyle(fontSize: 36, color: Colors.white),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Quiz(_answerQuestion, _questions, questionIndex)
                   ],
                 )
-              : Result(),
+              : CameraInterface(
+                  title: 'texas',
+                ),
         ),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.white,
       ),
     );
   }

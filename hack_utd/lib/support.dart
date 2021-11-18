@@ -2,37 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Support extends StatelessWidget {
+  call() {
+    launch("tel://4694655534");
+  }
+
   @override
   Widget build(BuildContext context) {
     const s = "Please call 911 to gain access to medical support";
-    return Container(
+    return MaterialApp(
+        home: Scaffold(
+            body: Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-            const Color(0xFF0652C5),
-            Colors.lightGreenAccent.shade200
-          ])),
+              colors: [Colors.red, Colors.redAccent])),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const <Widget>[
-          Center(
+        children: <Widget>[
+          const Center(
             child: Text(
               s,
               style: TextStyle(
-                  color: Colors.orange,
+                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
           ),
+          const SizedBox(
+            height: 25,
+          ),
           ElevatedButton(
-              onPressed: null /*(){launch("tel://4694655534")}*/,
-              child: Text("Call"))
+              onPressed: call, //call(),
+              child: const Center(child: Text("Call"))),
+          const SizedBox(
+            height: 25,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Center(
+                  child: Text(
+                "ignore",
+                style: TextStyle(color: Colors.red),
+              )),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white)))
         ],
       ),
-    );
+    )));
   }
 }

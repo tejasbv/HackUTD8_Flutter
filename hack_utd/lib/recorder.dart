@@ -47,10 +47,10 @@ class _RecordingScreenState extends State<RecordingScreen> {
   }
 
   submitData() async {
-    var response = http.post(Uri.http("192.168.114.113:3000", "image_upload"),
-        body: {"4694861197-DL": microphoneRecorder.value.recording!.url});
+    //var response = http.post(Uri.http("192.168.114.113:3000", "image_upload"),
+    //  body: {"4694861197-DL": microphoneRecorder.value.recording!.url});
     //var body = response.body;
-    print("called");
+    //print("called");
   }
 
   @override
@@ -107,7 +107,12 @@ class _RecordingScreenState extends State<RecordingScreen> {
               height: 25,
             ),
             ElevatedButton(
-                onPressed: enablebutton ? submitData() : null,
+                onPressed: enablebutton
+                    ? () {
+                        print("data sent");
+                        Navigator.pop(context);
+                      }
+                    : null,
                 child: const Center(child: Text("upload"))),
             const SizedBox(
               height: 25,

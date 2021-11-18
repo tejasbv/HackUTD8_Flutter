@@ -30,15 +30,25 @@ class Quiz extends StatelessWidget {
         Container(
           width: width / 1.25,
           child: Divider(
-            color: Color(0xffFFC300),
+            color: Colors.white,
             thickness: 5,
           ),
+        ),
+        SizedBox(
+          height: 20,
         ),
         ...(questions[questionIndex]["answers"] as List<Map<String, Object>>)
             .map((answer) {
           return Container(
-              child: Answer(() => _answerQuestion(answer["score"]),
-                  answer["text"].toString()));
+              child: Column(
+            children: [
+              Answer(() => _answerQuestion(answer["score"]),
+                  answer["text"].toString()),
+              SizedBox(
+                height: 15,
+              )
+            ],
+          ));
         }).toList()
       ],
     );

@@ -27,7 +27,7 @@ class CardPicture extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.redAccent,
                     boxShadow: [
